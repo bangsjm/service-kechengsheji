@@ -33,7 +33,7 @@ public class AuthServiceImpl implements AuthService {
 
     public Map login(String userName, String rawPassword) throws ServiceException {
 
-        UserManagerModel user = authUserMapper.getUserByUsername(userName);
+        UserManagerModel  user = authUserMapper.getUserByUsername(userName);
 
         // login successfully
         if (BCryptUtil.checkpw(rawPassword, user.getPassword())) {

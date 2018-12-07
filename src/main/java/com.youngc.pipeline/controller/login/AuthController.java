@@ -22,7 +22,7 @@ public class AuthController {
 
     }
 
-    @RequestMapping(path = "/login", method = RequestMethod.POST)
+    @RequestMapping(path = "", method = RequestMethod.POST)
     @ResponseBody
     Result login(String userName, String password) {
 
