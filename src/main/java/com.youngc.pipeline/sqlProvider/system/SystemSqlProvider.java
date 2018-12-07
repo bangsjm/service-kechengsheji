@@ -1,6 +1,5 @@
 package com.youngc.pipeline.sqlProvider.system;
 
-import com.youngc.pipeline.mapper.pipeline.DevUnitMapper;
 import com.youngc.pipeline.model.DevConfigParaModel;
 import com.youngc.pipeline.model.DevRepairModel;
 import com.youngc.pipeline.model.DevUnitModel;
