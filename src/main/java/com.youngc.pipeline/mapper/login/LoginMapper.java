@@ -11,11 +11,11 @@ import org.springframework.stereotype.Component;
 @Component
 public interface LoginMapper {
 
-    @Select("SELECT student_number,password FROM Student WHERE student_number = #{username}")
+    @Select("SELECT student_number,password,student_name FROM Student WHERE student_number = #{username}")
     StudentManagerModel getStudentByNumber(@Param("username") String username);
 
 
-    @Select("SELECT teacher_number,password FROM Teacher WHERE teacher_number = #{username}")
+    @Select("SELECT teacher_number,password,teacher_name FROM Teacher WHERE teacher_number = #{username}")
     TeacherManageModel getTeacherByNumber(@Param("username") String username);
 
     @Select("SELECT secretary_number,password FROM Teacher_secretary WHERE secretary_number = #{username}")

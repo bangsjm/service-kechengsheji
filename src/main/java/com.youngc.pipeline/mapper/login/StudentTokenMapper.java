@@ -11,7 +11,7 @@ public interface StudentTokenMapper {
     @Select(" SELECT COUNT(userId) FROM sys_token WHERE token = #{token}")
     Integer isTokenExists(@Param("token") String token);
 
-    @Select(" SELECT COUNT(userId) FROM sys_token WHERE  = #{userId}")
+    @Select(" SELECT COUNT(user_id) FROM sys_token WHERE user_id = #{userId}")
     Integer isTokenExistsById(@Param("userId") String userId);
 
     @Insert(" INSERT INTO sys_token (user_id, token) VALUES (#{userId}, #{token})")

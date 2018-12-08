@@ -11,7 +11,6 @@ import java.util.List;
 
 public interface SelectStudentService {
     List<College> selectCollege();
-
     boolean readExcel(MultipartFile file);
     List<Major> selectMajor(String collegeNumber);
     List<ClassModel> selectClass(String majorName);

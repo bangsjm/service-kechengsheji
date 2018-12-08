@@ -46,7 +46,7 @@ public class LoginServiceImpl implements LoginService {
                 String token = EncryptUtil.encodeMD5(stu.getStudentNumber() + Calendar.getInstance().getTime().toString());
 
                 // user already logged in
-                if (!studentTokenMapper.isTokenExistsById(stu.getStudentNumber()).equals("")) {
+                if (!studentTokenMapper.isTokenExistsById(stu.getStudentNumber()).equals(0)) {
                     studentTokenMapper.updateToken(stu.getStudentNumber(), token);
                 } else {
                     // 用户首次登陆
@@ -54,6 +54,9 @@ public class LoginServiceImpl implements LoginService {
                 }
                 result.put("token", token);
                 result.put("userName", username);
+                result.put("roleIds", identity);
+                result.put("realName",stu.getStudentName());
+
                 return result;
             }
         } else if (identity == 2) {
@@ -64,7 +67,7 @@ public class LoginServiceImpl implements LoginService {
                 String token = EncryptUtil.encodeMD5(tea.getTeacherNumber() + Calendar.getInstance().getTime().toString());
 
                 // user already logged in
-                if (!studentTokenMapper.isTokenExistsById(tea.getTeacherNumber()).equals("")) {
+                if (!studentTokenMapper.isTokenExistsById(tea.getTeacherNumber()).equals(0)) {
                     studentTokenMapper.updateToken(tea.getTeacherNumber(), token);
                 } else {
                     // 用户首次登陆
@@ -72,6 +75,8 @@ public class LoginServiceImpl implements LoginService {
                 }
                 result.put("token", token);
                 result.put("userName", username);
+                result.put("roleIds", identity);
+                result.put("realName",tea.getTeacherName());
                 return result;
             }
 
@@ -84,7 +89,7 @@ public class LoginServiceImpl implements LoginService {
 //                String token = EncryptUtil.encodeMD5(sec.getSecretaryNumber() + Calendar.getInstance().getTime().toString());
 //
 //                // user already logged in
-//                if (!studentTokenMapper.isTokenExistsById(sec.getSecretaryNumber()).equals("")) {
+//                if (!studentTokenMapper.isTokenExistsById(sec.getSecretaryNumber()).equals(0)) {
 //                    studentTokenMapper.updateToken(sec.getSecretaryNumber(), token);
 //                } else {
 //                    // 用户首次登陆
@@ -93,6 +98,8 @@ public class LoginServiceImpl implements LoginService {
 //
 //                result.put("token", token);
 //                result.put("userName", username);
+//               result.put("roleIds", identity);
+
 //            }
 //
 //            throw new ServiceException(ResultCode.USER_OR_PASS_ERROR, new Throwable(ResultCode.USER_OR_PASS_ERROR.getMsg()));
