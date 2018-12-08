@@ -5,10 +5,8 @@ import com.youngc.pipeline.result.ResultCode;
 import com.youngc.pipeline.result.ResultGenerator;
 import com.youngc.pipeline.service.TeacherSeretary.SelectStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/TeacherSecretary")
@@ -24,4 +22,8 @@ public class SelectStudentController {
 
     }
 
+    @PostMapping(value ="/excelAddStudent")
+    public Result excelAddStudent(@RequestParam MultipartFile file) {
+        return ResultGenerator.generate(ResultCode.SUCCESS,selectStudentService.readExcel(file));
+    }
 }

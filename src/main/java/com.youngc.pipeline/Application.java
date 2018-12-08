@@ -11,9 +11,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 import javax.servlet.MultipartConfigElement;
 
-/**
- * @author liweiqiang
- */
 @SpringBootApplication
 @MapperScan("com.youngc.pipeline.mapper")
 public class Application {

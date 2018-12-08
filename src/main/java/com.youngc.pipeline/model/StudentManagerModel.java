@@ -16,5 +16,7 @@ public class StudentManagerModel {
 
     private String sex;
 
-    private String entranceYear;
+    private Long entranceYear;
+
+    private Long grade;
 }
