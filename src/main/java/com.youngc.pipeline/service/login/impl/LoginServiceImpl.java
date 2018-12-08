@@ -101,7 +101,6 @@ public class LoginServiceImpl implements LoginService {
 //        }
         else{
             UserManagerModel user = authUserMapper.getUserByUsername(username);
-            System.out.println(123456);
             // login successfully
             if (BCryptUtil.checkpw(password, user.getPassword())) {
 
@@ -122,10 +121,11 @@ public class LoginServiceImpl implements LoginService {
                 result.put("droleIds",user.getDroleIds());
                 return result;
             }
-            System.out.println("awfawfSDVazVd");
 
         }
 
         throw new ServiceException(ResultCode.USER_OR_PASS_ERROR, new Throwable(ResultCode.USER_OR_PASS_ERROR.getMsg()));
     }
+
+
 }

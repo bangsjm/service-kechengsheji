@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class College {
 
-    private int CollegeNumber;
+    private String CollegeNumber;
 
     private String CollegeName;
 

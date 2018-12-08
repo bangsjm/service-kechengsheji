@@ -1,8 +1,10 @@
 package com.youngc.pipeline.service.TeacherSeretary.impl;
 
 import com.youngc.pipeline.mapper.TeacherSeretary.SelectStudentMapper;
+import com.youngc.pipeline.model.ClassModel;
 import com.youngc.pipeline.model.College;
 import com.youngc.pipeline.model.StudentManagerModel;
+import com.youngc.pipeline.model.Major;
 import com.youngc.pipeline.service.TeacherSeretary.SelectStudentService;
 import com.youngc.pipeline.utils.BCryptUtil;
 import org.apache.poi.ss.usermodel.Row;
@@ -73,4 +75,14 @@ public class SelectStudentServiceImpl implements SelectStudentService {
     }
 
 
+    public List<Major> selectMajor(String collegeNumber){
+        List<Major> majors = selectStudentMapper.getMajor(collegeNumber);
+        return majors;
+    }
+
+    public List<ClassModel> selectClass(String majorName) {
+        System.out.println(1234567687);
+        List<ClassModel> classes = selectStudentMapper.getClass(majorName);
+        return classes;
+    }
 }

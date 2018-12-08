@@ -24,6 +24,20 @@ public class SelectStudentController {
 
     @PostMapping(value ="/excelAddStudent")
     public Result excelAddStudent(@RequestParam MultipartFile file) {
-        return ResultGenerator.generate(ResultCode.SUCCESS,selectStudentService.readExcel(file));
+        return ResultGenerator.generate(ResultCode.SUCCESS, selectStudentService.readExcel(file));
+    }
+
+    @RequestMapping(path = "/getMajor", method = RequestMethod.POST)
+    @ResponseBody
+    public Result getMajor(String collegeNumber){
+        return  ResultGenerator.generate(ResultCode.SUCCESS, selectStudentService.selectMajor(collegeNumber));
+    }
+
+    @RequestMapping(path = "/getClass", method = RequestMethod.POST)
+    @ResponseBody
+    public Result getClass(String majorName){
+        System.out.println(123456);
+        System.out.println(majorName);
+        return ResultGenerator.generate(ResultCode.SUCCESS, selectStudentService.selectClass(majorName));
     }
 }
