@@ -1,5 +1,7 @@
 package com.youngc.pipeline.service.TeacherSeretary.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.youngc.pipeline.mapper.TeacherSeretary.SelectStudentMapper;
 import com.youngc.pipeline.model.ClassModel;
 import com.youngc.pipeline.model.College;
@@ -27,7 +29,6 @@ public class SelectStudentServiceImpl implements SelectStudentService {
     private SelectStudentMapper selectStudentMapper;
 
     public List<College> selectCollege(){
-        List<College> demo=selectStudentMapper.getCollege();
         return selectStudentMapper.getCollege();
     }
 
@@ -53,7 +54,7 @@ public class SelectStudentServiceImpl implements SelectStudentService {
                         studentManagerModel.setEntranceYear(row.getCell(3)!=null?Long.parseLong(new java.text.DecimalFormat("0").format(row.getCell(3).getNumericCellValue())):null);
                         studentManagerModel.setEmail(row.getCell(4)!=null?"'"+row.getCell(4).getStringCellValue()+"'":null);
                         studentManagerModel.setGrade(row.getCell(5)!=null?Long.parseLong(new java.text.DecimalFormat("0").format(row.getCell(5).getNumericCellValue())):null);
-                        String password=row.getCell(6)!=null?"'"+row.getCell(6).getStringCellValue()+"'":null;
+                        String password=row.getCell(6)!=null?row.getCell(6).getStringCellValue():null;
                         studentManagerModel.setPassword(BCryptUtil.hashpw(password, BCryptUtil.gensalt(12)));
                         data.add(studentManagerModel);
                     }
@@ -80,9 +81,24 @@ public class SelectStudentServiceImpl implements SelectStudentService {
         return majors;
     }
 
-    public List<ClassModel> selectClass(String majorName) {
-        System.out.println(1234567687);
+    public List<ClassModel> selectClass(String majorNumber) {
+        String majorName=selectStudentMapper.getMajorName(majorNumber);
         List<ClassModel> classes = selectStudentMapper.getClass(majorName);
         return classes;
     }
+
+    public Page getStudent(String searchNumber, int pageNum, int pageSize){
+        PageHelper.startPage(pageNum, pageSize);
+        return (Page) selectStudentMapper.getStudent(searchNumber);
+    }
+
+    public boolean resetPassword(String studentNumber,String password){
+        String pad=BCryptUtil.hashpw(password, BCryptUtil.gensalt(12));
+        return selectStudentMapper.resetPassword(studentNumber,pad);
+    }
+
+    public boolean updateStudent(StudentManagerModel studentManagerModel){
+        return selectStudentMapper.updateStudent(studentManagerModel);
+    }
+
 }

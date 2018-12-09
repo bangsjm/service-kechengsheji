@@ -8,6 +8,8 @@ import lombok.Data;
 public class StudentManagerModel {
     private String studentNumber;
 
+    private String oldStudentNumber;
+
     private String password;
 
     private String email;
