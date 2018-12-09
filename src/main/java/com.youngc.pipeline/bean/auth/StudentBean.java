@@ -6,6 +6,8 @@ import lombok.Data;
 public class StudentBean {
     private String studentNumber;
 
+    private String oldStudentNumber;
+
     private String password;
 
     private String email;

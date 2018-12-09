@@ -1,5 +1,7 @@
 package com.youngc.pipeline.controller.TeacherSecretary;
 
+import com.youngc.pipeline.bean.auth.StudentBean;
+import com.youngc.pipeline.model.StudentManagerModel;
 import com.youngc.pipeline.result.Result;
 import com.youngc.pipeline.result.ResultCode;
 import com.youngc.pipeline.result.ResultGenerator;
@@ -38,5 +40,24 @@ public class SelectStudentController {
         System.out.println(123456);
         System.out.println(majorName);
         return ResultGenerator.generate(ResultCode.SUCCESS, selectStudentService.selectClass(majorName));
+    }
+
+    @RequestMapping(path = "/search", method = RequestMethod.GET)
+    public Result searchStudent(@RequestParam String searchNumber, @RequestParam int pageNum, @RequestParam int pageSize){
+        return ResultGenerator.generate(selectStudentService.getStudent(searchNumber, pageNum, pageSize));
+    }
+
+    @RequestMapping(path = "/resetPassword", method = RequestMethod.POST)
+    public Result resetPassword(@RequestParam String studentNumber, String password){
+        return ResultGenerator.generate(ResultCode.SUCCESS,selectStudentService.resetPassword(studentNumber, password));
+    }
+
+    @PutMapping(path = "/resetInformation")
+    public Result resetInformation(@RequestBody StudentBean studentBean){
+        StudentManagerModel studentManagerModel=new StudentManagerModel();
+        studentManagerModel.setStudentNumber(studentBean.getStudentNumber());
+        studentManagerModel.setEmail(studentBean.getEmail());
+        studentManagerModel.setOldStudentNumber(studentBean.getOldStudentNumber());
+        return ResultGenerator.generate(ResultCode.SUCCESS, selectStudentService.updateStudent(studentManagerModel));
     }
 }
