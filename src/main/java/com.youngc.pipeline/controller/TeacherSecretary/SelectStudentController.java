@@ -19,7 +19,6 @@ public class SelectStudentController {
     @ResponseBody
     public Result getCollege() {
         return ResultGenerator.generate(ResultCode.SUCCESS, selectStudentService.selectCollege());
-
     }
 
     @PostMapping(value ="/excelAddStudent")
