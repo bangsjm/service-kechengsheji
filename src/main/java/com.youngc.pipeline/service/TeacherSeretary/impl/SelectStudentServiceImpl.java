@@ -81,7 +81,6 @@ public class SelectStudentServiceImpl implements SelectStudentService {
     }
 
     public List<ClassModel> selectClass(String majorName) {
-        System.out.println(1234567687);
         List<ClassModel> classes = selectStudentMapper.getClass(majorName);
         return classes;
     }
