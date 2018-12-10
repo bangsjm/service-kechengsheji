@@ -16,8 +16,9 @@ public class StudentBean {
 
     private String sex;
 
-    private int entranceYear;
+    private Long entranceYear;
 
     private int identity;
 
+    private Long grade;
 }

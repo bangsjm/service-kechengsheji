@@ -19,11 +19,17 @@ public interface SelectStudentService {
 
     List<Major> selectMajor(String collegeNumber);
 
-    List<ClassModel> selectClass(String majorName);
+    List<ClassModel> selectClass(String collegeNumber,String majorName);
 
     Page getStudent(String searchNumber,int pageNum,int pageSize);
 
     boolean resetPassword(String studentNumber,String password);
 
-    boolean updateStudent(StudentManagerModel studentManagerModel);
+    int updateStudent(StudentManagerModel studentManagerModel);
+
+    int deleteStudent(String deleteStudentNumbers);
+
+    boolean addStudentSingal(StudentManagerModel studentManagerModel);
+
+    int isStudentNumberExists(String studentNumber);
 }
