@@ -1,9 +1,9 @@
-package com.youngc.pipeline.model;
+package com.youngc.pipeline.bean.auth;
 
 import lombok.Data;
 
 @Data
-public class Major {
+public class MajorBean {
     private String majorNumber;
 
     private String majorName;

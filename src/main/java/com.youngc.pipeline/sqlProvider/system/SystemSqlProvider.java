@@ -12,7 +12,28 @@ import java.text.MessageFormat;
 import java.util.List;
 import java.util.Map;
 
-public class SystemSqlProvider {
+public class  SystemSqlProvider {
+    //批量删除学生
+    public String batStuDel(Map map){
+        String collegeNumber = (String)map.get("arg0") ;
+        String majorNumber = (String ) map.get("arg1");
+        Long droleId = (Long) map.get("arg2");
+
+        StringBuffer sb = new StringBuffer();
+        String[] majorNumbers = majorNumber.split(",");
+        //SELECT语句的拼成
+        sb.append("SELECT COUNT(student_number) FROM Student WHERE student_number REGEXP '[0-9]{2}[");
+        sb.append(collegeNumber).append("](");
+        for(int i = 0;i< majorNumbers.length;i++) {
+            sb.append(majorNumbers[i]);
+            if (i !=(majorNumbers.length - 1)) {
+                sb.append("|");
+            }
+        }
+        sb.append(")'");
+        System.out.println(sb.toString());
+        return sb.toString();
+    }
 
     public String putDataUnit(Map<String, Object> para) {
 

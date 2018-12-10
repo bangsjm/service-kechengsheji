@@ -6,6 +6,8 @@ import lombok.Data;
 public class StudentBean {
     private String studentNumber;
 
+    private String oldStudentNumber;
+
     private String password;
 
     private String email;
@@ -14,8 +16,9 @@ public class StudentBean {
 
     private String sex;
 
-    private int entranceYear;
+    private Long entranceYear;
 
     private int identity;
 
+    private Long grade;
 }
