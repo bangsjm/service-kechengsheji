@@ -21,19 +21,50 @@ public class SelectMajorServiceImpl implements SelectMajorService{
         return (Page) selectMajorMapper.getMajors(collegeNumber);
     }
 
-    public boolean addMajor(Major major) {
-        selectMajorMapper.addMajor(major);
-        return true;
-    }
-
-    public int updateMajor(Major major) {
-        if(selectMajorMapper.isMajorExists(major) == 1){
+    public int addMajor(Major major) {
+        if(selectMajorMapper.isMajorExists(major) > 0){
             return 0;
         }else {
-            return selectMajorMapper.updateMajor(major);
+             return  selectMajorMapper.addMajor(major);
         }
     }
 
+
+    public int updateMajor(Major major) {
+        System.out.println(major.getMajorNumber()+"               "+major.getOldMajorNumber());
+        if(!major.getOldMajorNumber().equals(major.getMajorNumber())) {
+            if (selectMajorMapper.isMajorExists(major) > 0) {
+                return 0;
+            } else {
+                if(selectMajorMapper.updateMajor(major)>0){
+                    return 2;
+                }else {
+                    return 1;
+                }
+            }
+        }else {
+            if(selectMajorMapper.updateMajor2(major)>0){
+                return 2;
+            }else {
+                return 1;
+            }
+        }
+    }
+
+    public int deleteMajor(String collegeNumber, String majorNumbers) {
+//        selectMajorMapper.isMajorExistsInCourse(collegeNumber,majorNumbers) >0 ||
+//        ||
+//        selectMajorMapper.isMajorExistsInTeacher(collegeNumber,majorNumbers)>0){
+        if(selectMajorMapper.isMajorExistsInStudent(collegeNumber,majorNumbers,Long.parseLong("1"))>0){
+            return  0;
+        }else if(selectMajorMapper.isMajorExistsInCourse(collegeNumber,majorNumbers) >0){
+            return -1;
+        }else if (selectMajorMapper.isMajorExistsInTeacher(collegeNumber,majorNumbers)>0){
+            return -2;
+        }else{
+            return selectMajorMapper.deleteMajor(collegeNumber,majorNumbers);
+        }
+    }
 
 
 }

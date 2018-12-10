@@ -45,7 +45,13 @@ public class SelectMajorController {
         major.setMajorNumber(majorBean.getMajorNumber());
         major.setOpenYear(majorBean.getOpenYear());
         major.setOldMajorNumber(majorBean.getOldMajorNumber());
-
+        System.out.println(major.getMajorNumber()+"                 "+major.getOldMajorNumber());
         return ResultGenerator.generate(ResultCode.SUCCESS, selectMajorService.updateMajor(major));
+    }
+
+    @DeleteMapping("/{deleteMajor}")
+    public Result deleteMajor(@RequestParam("collegeNumber") String collegeNumber,@RequestParam("majorNumbers") String majorNumbers){
+        System.out.println(collegeNumber+"                 "+majorNumbers);
+        return ResultGenerator.generate(ResultCode.SUCCESS, selectMajorService.deleteMajor(collegeNumber,majorNumbers));
     }
 }

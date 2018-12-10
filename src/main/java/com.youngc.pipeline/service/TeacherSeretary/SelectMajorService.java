@@ -10,8 +10,10 @@ import java.util.List;
 public interface SelectMajorService {
     Page getMajors(String collegeNumber,int pageNum,int pageSize);
 
-    boolean addMajor(Major major);
+    int addMajor(Major major);
 
     int updateMajor(Major major);
+
+    int deleteMajor(String collegeNumber,String majorNumbers);
 
 }
