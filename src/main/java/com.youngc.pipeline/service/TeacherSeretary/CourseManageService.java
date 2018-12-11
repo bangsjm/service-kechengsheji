@@ -12,4 +12,8 @@ public interface CourseManageService {
     int addCourse(CourseManageModel courseManageModel);
 
     int isExistsCourse(String courseNumber);
+
+    int deleteCourse(String courseNumbers);
+
+    int updateCourse(CourseManageModel courseManageModel);
 }

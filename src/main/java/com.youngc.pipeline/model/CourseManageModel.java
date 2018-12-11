@@ -22,4 +22,6 @@ public class CourseManageModel {
     private String oldMajorNumber;
 
     private String oldCollegeNumber;
+
+    private String oldCourseNumber;
 }
