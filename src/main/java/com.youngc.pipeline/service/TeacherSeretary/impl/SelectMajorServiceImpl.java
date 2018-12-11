@@ -31,7 +31,6 @@ public class SelectMajorServiceImpl implements SelectMajorService{
 
 
     public int updateMajor(Major major) {
-        System.out.println(major.getMajorNumber()+"               "+major.getOldMajorNumber());
         if(!major.getOldMajorNumber().equals(major.getMajorNumber())) {
             if (selectMajorMapper.isMajorExists(major) > 0) {
                 return 0;

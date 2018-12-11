@@ -54,4 +54,26 @@ public class CourseManageController {
     public Result isExistsCourse(@RequestParam String courseNumber){
         return ResultGenerator.generate(ResultCode.SUCCESS, courseManageService.isExistsCourse(courseNumber));
     }
+
+    @RequestMapping(path = "/deleteCourse", method = RequestMethod.DELETE)
+    @ResponseBody
+    public Result deleteCourse(@RequestParam String courseNumbers){
+        return ResultGenerator.generate(ResultCode.SUCCESS, courseManageService.deleteCourse(courseNumbers));
+    }
+
+    @RequestMapping(path = "/updateCourse", method = RequestMethod.PUT)
+    @ResponseBody
+    public Result updateCourse(@RequestBody CourseBean courseBean){
+        CourseManageModel courseManageModel = new CourseManageModel();
+        courseManageModel.setCourseNumber(courseBean.getCourseNumber());
+        courseManageModel.setCourseName(courseBean.getCourseName());
+        courseManageModel.setCourseNature(courseBean.getCourseNature());
+        courseManageModel.setCourseCredit(courseBean.getCourseCredit());
+        courseManageModel.setCourseHour(courseBean.getCourseHour());
+        courseManageModel.setCollegeNumber(courseBean.getCollegeNumber());
+        courseManageModel.setMajorNumber(courseBean.getMajorNumber());
+        courseManageModel.setOldCourseNumber(courseBean.getOldCourseNumber());
+
+        return ResultGenerator.generate(ResultCode.SUCCESS, courseManageService.updateCourse(courseManageModel));
+    }
 }
