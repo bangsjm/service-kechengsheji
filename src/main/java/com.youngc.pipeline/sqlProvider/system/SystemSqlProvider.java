@@ -13,6 +13,34 @@ import java.util.List;
 import java.util.Map;
 
 public class  SystemSqlProvider {
+
+    public String addCourse(Map<String, Object> map){
+        Long demo = (Long) map.get("demo") ;
+        List<Map<String, String>> number = (List<Map<String, String>>)map.get("number") ;
+        int[] demo1 = (int[]) map.get("demo1");
+        Map<String,String> numberMap=number.get(0);
+        String[] courseIds=numberMap.get("addCourseIds").split(",");
+        //int grade=Integer.valueOf(numberMap.get("grade"));
+        //int term=Integer.valueOf(numberMap.get("term"));
+        int grade=demo1[0];
+        int term=demo1[1];
+        String majorNumber=numberMap.get("majorNumber");
+        String collegeNumber=numberMap.get("collegeNumber");
+        StringBuilder sqlBuilder = new StringBuilder("INSERT INTO Obligatory_teachPlan(course_number, major_number, College_number, grade, term) VALUES ");
+        String template="(%s,%s,%s,%d,%d)";
+        for(int i=0;i<courseIds.length;i++){
+            sqlBuilder.append(String.format(template,"'"+courseIds[i]+"'",
+                    "'"+majorNumber+"'",
+                    "'"+collegeNumber+"'",
+                    grade,
+                    term));
+            if (i < courseIds.length - 1) {
+                sqlBuilder.append(",");
+            }
+        }
+        return sqlBuilder.toString();
+    }
+
     //批量删除学生
     public String batStuDel(Map map){
         String collegeNumber = (String)map.get("arg0") ;
@@ -225,9 +253,9 @@ public class  SystemSqlProvider {
         List<StudentManagerModel> data = (List<StudentManagerModel>) para.get("arg0");
 
         StringBuilder sqlBuilder = new StringBuilder("INSERT INTO Student(student_number, password, email, student_name, sex, entrance_year, grade) VALUES ");
-            String template="(%s,%s,%s,%s,%s,%d,%d)";
+        String template="(%s,%s,%s,%s,%s,%d,%d)";
 
-            MessageFormat devMessageFormat = new MessageFormat("({0},{1},{2},{3},{4},{5},{6})");
+        MessageFormat devMessageFormat = new MessageFormat("({0},{1},{2},{3},{4},{5},{6})");
         for(int i=0;i<data.size();i++){
             StudentManagerModel studentManagerModel=data.get(i);
             //devBuilder.append(devMessageFormat.format(new Object[]{studentManagerModel.getStudentNumber(),

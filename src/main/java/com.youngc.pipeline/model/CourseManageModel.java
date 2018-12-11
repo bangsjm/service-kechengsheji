@@ -5,6 +5,8 @@ import lombok.Data;
 @Data
 public class CourseManageModel {
 
+    private int OtId;
+
     private String courseNumber;
 
     private String courseName;
