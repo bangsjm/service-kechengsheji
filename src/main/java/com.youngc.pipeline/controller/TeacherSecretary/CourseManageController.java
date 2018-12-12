@@ -76,4 +76,10 @@ public class CourseManageController {
 
         return ResultGenerator.generate(ResultCode.SUCCESS, courseManageService.updateCourse(courseManageModel));
     }
+
+    @RequestMapping(path = "/getMajorNumber", method = RequestMethod.POST)
+    @ResponseBody
+    public Result getMajorNumber(@RequestParam String courseNumber){
+        return ResultGenerator.generate(ResultCode.SUCCESS, courseManageService.getMajorNumber(courseNumber));
+    }
 }
