@@ -31,4 +31,10 @@ public class TeachingPlanController {
     public Result addCourse(@RequestParam String addCourseIds,@RequestParam String collegeNumber, @RequestParam String majorNumber,@RequestParam int grade, @RequestParam int term){
         return ResultGenerator.generate(ResultCode.SUCCESS,teacherPlanService.addCourse(addCourseIds,collegeNumber,majorNumber,grade,term));
     }
+
+    @RequestMapping(path = "/deleteTeachingPlan", method = RequestMethod.DELETE)
+    @ResponseBody
+    public Result deleteTeachingPlan(@RequestParam String deleteOtIds){
+        return ResultGenerator.generate(ResultCode.SUCCESS,teacherPlanService.deleteTeachingPlan(deleteOtIds));
+    }
 }

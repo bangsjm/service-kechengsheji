@@ -36,8 +36,8 @@ public class SelectTeacherController {
         TeacherManageModel teachermanagemodel = new TeacherManageModel();
         teachermanagemodel.setTeacherNumber(teacherBean.getTeacherNumber());
         teachermanagemodel.setTeacherName(teacherBean.getTeacherName());
-        teachermanagemodel.setSelectcollege(teacherBean.getSelectcollege());
-        teachermanagemodel.setSelectmajor(teacherBean.getSelectmajor());
+        teachermanagemodel.setSelectCollege(teacherBean.getSelectcollege());
+        teachermanagemodel.setSelectMajor(teacherBean.getSelectmajor());
         String pad= BCryptUtil.hashpw(teacherBean.getPassword(), BCryptUtil.gensalt(12));
         teachermanagemodel.setPassword(pad);
         teachermanagemodel.setHiredate(teacherBean.getHiredate());
@@ -60,10 +60,10 @@ public class SelectTeacherController {
     public Result putTeacher(@RequestBody TeacherBean teacherBean) {
 
         TeacherManageModel teachermanagemodel = new TeacherManageModel();
-        teachermanagemodel.setOtherteacherNumber(teacherBean.getOtherteacherNumber());
+        teachermanagemodel.setOtherTeacherNumber(teacherBean.getOtherteacherNumber());
         teachermanagemodel.setTeacherName(teacherBean.getTeacherName());
-        teachermanagemodel.setSelectcollege(teacherBean.getSelectcollege());
-        teachermanagemodel.setSelectmajor(teacherBean.getSelectmajor());
+        teachermanagemodel.setSelectCollege(teacherBean.getSelectcollege());
+        teachermanagemodel.setSelectMajor(teacherBean.getSelectmajor());
         teachermanagemodel.setHiredate(teacherBean.getHiredate());
         teachermanagemodel.setProf(teacherBean.getProf());
         teachermanagemodel.setEmail(teacherBean.getEmail());

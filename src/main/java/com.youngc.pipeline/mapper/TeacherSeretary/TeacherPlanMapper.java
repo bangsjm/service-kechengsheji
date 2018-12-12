@@ -2,6 +2,7 @@ package com.youngc.pipeline.mapper.TeacherSeretary;
 
 import com.youngc.pipeline.model.CourseManageModel;
 import com.youngc.pipeline.sqlProvider.system.SystemSqlProvider;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -26,5 +27,8 @@ public interface TeacherPlanMapper {
 
     @InsertProvider(type = SystemSqlProvider.class, method = "addCourse")
     boolean addCourse(@Param("demo")Long demo,@Param("number")List<Map<String, String>> number,@Param("demo1")int[] demo1);
+
+    @Delete("DELETE FROM Obligatory_teachPlan WHERE OtId in (${deleteOtIds})")
+    boolean deleteTeachingPlan(@Param("deleteOtIds")String deleteOtIds);
 }
 

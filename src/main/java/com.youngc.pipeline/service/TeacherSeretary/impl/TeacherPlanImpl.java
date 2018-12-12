@@ -43,4 +43,8 @@ public class TeacherPlanImpl implements TeacherPlanService{
         gradeAnd[1]=term;
         return teacherPlanMapper.addCourse(Long.parseLong("1"),number,gradeAnd);
     }
+
+    public boolean deleteTeachingPlan(String deleteOtIds){
+        return teacherPlanMapper.deleteTeachingPlan(deleteOtIds);
+    }
 }

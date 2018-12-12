@@ -9,10 +9,32 @@ import com.youngc.pipeline.model.StudentManagerModel;
 
 
 import java.text.MessageFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
 public class  SystemSqlProvider {
+
+    public String addTeacher(Map map){
+        String selectTeachers=(String) map.get("selectTeachers") ;
+        String courseNumber=(String) map.get("courseNumber") ;
+        Long demo=(Long) map.get("demo");
+        String[] teachers=selectTeachers.split(",");
+        Calendar cale =  Calendar.getInstance();
+        int year=cale.get(Calendar.YEAR);
+        StringBuilder sqlBuilder = new StringBuilder("INSERT INTO Elective_course(teacher_number,year,course_number) VALUES ");
+        String template="(%s,%d,%s)";
+        for(int i=0;i<teachers.length;i++){
+            sqlBuilder.append(String.format(template,"'"+teachers[i]+"'",
+                    year,
+                    "'"+courseNumber+"'"
+                    ));
+            if (i < teachers.length - 1) {
+                sqlBuilder.append(",");
+            }
+        }
+        return sqlBuilder.toString();
+    }
 
     public String addCourse(Map<String, Object> map){
         Long demo = (Long) map.get("demo") ;
