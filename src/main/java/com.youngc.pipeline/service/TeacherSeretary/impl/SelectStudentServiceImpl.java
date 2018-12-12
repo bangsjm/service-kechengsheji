@@ -86,12 +86,9 @@ public class SelectStudentServiceImpl implements SelectStudentService {
         return majors;
     }
 
-<<<<<<< HEAD
-    public List<ClassModel> selectClass(String majorName) {
-=======
+
     public List<ClassModel> selectClass(String collegeNumber,String majorNumber) {
         String majorName=selectStudentMapper.getMajorName(collegeNumber,majorNumber);
->>>>>>> 54795542090228f2cbe80a17e955906a7f0ac923
         List<ClassModel> classes = selectStudentMapper.getClass(majorName);
         return classes;
     }
