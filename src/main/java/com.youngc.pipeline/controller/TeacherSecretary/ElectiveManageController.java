@@ -31,4 +31,10 @@ public class ElectiveManageController {
     public Result addTeacher(@RequestParam String selectTeachers, @RequestParam String courseNumber){
         return ResultGenerator.generate(ResultCode.SUCCESS,electiveManageService.addTeacher(selectTeachers,courseNumber));
     }
+
+    @RequestMapping(path = "/searchDetails", method = RequestMethod.GET)
+    @ResponseBody
+    public Result addTeacher(@RequestParam String courseNumber,@RequestParam int pageNum, @RequestParam int pageSize){
+        return ResultGenerator.generate(ResultCode.SUCCESS,electiveManageService.searchDetails(courseNumber,pageNum,pageSize));
+    }
 }

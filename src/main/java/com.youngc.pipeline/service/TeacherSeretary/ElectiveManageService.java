@@ -11,6 +11,8 @@ public interface ElectiveManageService {
 
     List<TeacherManageModel> getTeacher(String collegeNumber,String majorNumber);
 
-    boolean addTeacher(String selectTeachers,String courseNumber);
+    int addTeacher(String selectTeachers,String courseNumber);
+
+    Page searchDetails(String courseNumber,int pageNum, int pageSize);
 
 }
