@@ -21,4 +21,6 @@ public class CourseBean {
     private String oldMajorNumber;
 
     private String oldCollegeNumber;
+
+    private String oldCourseNumber;
 }

@@ -5,10 +5,10 @@ import lombok.Data;
 import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
 
 import java.util.Date;
+import java.util.List;
 
 
 @Data
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TeacherManageModel {
     private String teacherNumber;
 
@@ -20,13 +20,18 @@ public class TeacherManageModel {
 
     private String sex;
 
-    private String selectmajor;
+    private String selectMajor;
 
     private String prof;
 
     private String hiredate;
 
-    private String selectcollege;
+    private String selectCollege;
 
-    private String otherteacherNumber;
+    private String otherTeacherNumber;
+
+    private List<TeacherManageModel> children;
+
+    private String id;
+
 }

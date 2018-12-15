@@ -36,4 +36,28 @@ public class CourseManageServiceImpl implements CourseManageService{
             return 0;
         }
     }
+
+    public int deleteCourse(String courseNumbers) {
+        if(courseManageMapper.isExistsCourseInStudent(courseNumbers)>0){
+            return 0;
+        }else {
+            return courseManageMapper.deleteCourse(courseNumbers);
+        }
+    }
+
+    public int updateCourse(CourseManageModel courseManageModel) {
+        if(courseManageModel.getCourseNumber().equals(courseManageModel.getCourseNumber())){
+            return courseManageMapper.updateCourse(courseManageModel);
+        }else {
+            if(courseManageMapper.isExistsCourse(courseManageModel.getCourseNumber())>0){
+                return -1;
+            }else {
+                return courseManageMapper.updateCourse(courseManageModel);
+            }
+        }
+    }
+
+    public String getMajorNumber(String courseNumber) {
+        return courseManageMapper.getMajorNumber(courseNumber);
+    }
 }
