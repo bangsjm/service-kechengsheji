@@ -37,4 +37,10 @@ public class ElectiveManageController {
     public Result addTeacher(@RequestParam String courseNumber,@RequestParam int pageNum, @RequestParam int pageSize){
         return ResultGenerator.generate(ResultCode.SUCCESS,electiveManageService.searchDetails(courseNumber,pageNum,pageSize));
     }
+
+    @RequestMapping(path = "/deleteDetails", method = RequestMethod.GET)
+    @ResponseBody
+    public Result deleteDetails(@RequestParam String teacherNumber,@RequestParam String courseNumber){
+        return ResultGenerator.generate(ResultCode.SUCCESS,electiveManageService.deleteDetails(teacherNumber,courseNumber));
+    }
 }
