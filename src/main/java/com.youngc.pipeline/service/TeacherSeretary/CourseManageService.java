@@ -17,5 +17,5 @@ public interface CourseManageService {
 
     int updateCourse(CourseManageModel courseManageModel);
 
-    int getMajorNumber(String courseNumber);
+    String  getMajorNumber(String courseNumber);
 }

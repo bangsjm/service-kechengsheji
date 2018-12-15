@@ -57,7 +57,7 @@ public class CourseManageServiceImpl implements CourseManageService{
         }
     }
 
-    public int getMajorNumber(String courseNumber) {
+    public String getMajorNumber(String courseNumber) {
         return courseManageMapper.getMajorNumber(courseNumber);
     }
 }

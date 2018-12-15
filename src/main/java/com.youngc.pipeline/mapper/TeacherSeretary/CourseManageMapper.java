@@ -38,5 +38,5 @@ public interface CourseManageMapper {
     int updateCourse(CourseManageModel courseManageModel);
 
     @Select("SELECT major_number FROM Course WHERE course_number = #{courseNumber}")
-    int getMajorNumber(@Param("courseNumber") String courseNumber);
+    String getMajorNumber(@Param("courseNumber") String courseNumber);
 }
