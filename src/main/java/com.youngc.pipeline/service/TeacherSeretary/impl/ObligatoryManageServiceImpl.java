@@ -3,6 +3,7 @@ package com.youngc.pipeline.service.TeacherSeretary.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.youngc.pipeline.mapper.TeacherSeretary.ObligatoryManageMapper;
+import com.youngc.pipeline.model.CourseManageModel;
 import com.youngc.pipeline.model.ObligatoryManageModel;
 import com.youngc.pipeline.model.TeacherManageModel;
 import com.youngc.pipeline.service.TeacherSeretary.ObligatoryManageService;
@@ -43,5 +44,7 @@ public class ObligatoryManageServiceImpl implements ObligatoryManageService {
         return obligatoryManageMapper.deleteObligatory(obligatoryIds);
     }
 
-
+    public CourseManageModel  getCourseInfo(String courseNumber){
+        return obligatoryManageMapper.getCourseInfo(courseNumber);
+    }
 }

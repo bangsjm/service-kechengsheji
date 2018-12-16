@@ -1,5 +1,6 @@
 package com.youngc.pipeline.mapper.TeacherSeretary;
 
+import com.youngc.pipeline.model.CourseManageModel;
 import com.youngc.pipeline.model.TeacherManageModel;
 import com.youngc.pipeline.model.ObligatoryManageModel;
 import org.apache.ibatis.annotations.Delete;
@@ -32,4 +33,7 @@ public interface ObligatoryManageMapper {
 
     @Select("SELECT COUNT(*) FROM obligatory_teacher WHERE course_number=#{courseNumber} AND class_id=#{classId} AND teacher_number=#{teacherNumber}")
     int isExists(@Param("courseNumber") String courseNumber,@Param("classId") int classId,@Param("teacherNumber") String teacherNumber);
+
+    @Select("SELECT major_number,college_number from Course WHERE course_number=#{courseNumber}")
+    CourseManageModel getCourseInfo(@Param("courseNumber") String courseNumber);
 }
