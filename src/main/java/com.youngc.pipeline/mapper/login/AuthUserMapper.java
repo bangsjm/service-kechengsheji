@@ -31,4 +31,22 @@ public interface AuthUserMapper {
             " WHERE user_id = #{userId}")
     int updateUserPassword(@Param("userId") Long userId,
                            @Param("hashedNewPasswd") String hashedNewPasswd);
+
+    @Select("select password from Student where student_number=#{studentNumber}")
+    String getStudentPassword(@Param("studentNumber") String studentNumber);
+
+    @Select("select password from Teacher where teacher_number=#{teacherNumber}")
+    String getTeacherPassword(@Param("teacherNumber") String teacherNumber);
+
+    @Select("select password from Teacher_secretary where secretary_number=#{teacherSecretaryNumber}")
+    String getTeacherSecretaryPassword(@Param("teacherSecretaryNumber") String teacherSecretaryNumber);
+
+    @Update("update Student set password=#{password} where student_number=#{studentNumber}")
+    boolean changeStudentPassword(@Param("studentNumber") String studentNumber,@Param("password") String password);
+
+    @Update("update Teacher set password=#{password} where teacher_number=#{teacherNumber}")
+    boolean changeTeacherPassword(@Param("teacherNumber") String teacherNumber,@Param("password") String password);
+
+    @Update("update Teacher_secretary set password=#{password} where secretary_number=#{teacherSecretaryNumber}")
+    boolean changeTeacherSecretaryPassword(@Param("teacherSecretaryNumber") String studentNumber,@Param("password") String password);
 }

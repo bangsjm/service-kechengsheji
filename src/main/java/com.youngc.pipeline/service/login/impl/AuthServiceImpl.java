@@ -99,4 +99,54 @@ public class AuthServiceImpl implements AuthService {
     public Long getUserIdByToken(String token) {
         return authTokenMapper.getUserIdByToken(token);
     }
+
+    public int oldPassword(String userName,String oldPassword,int identity){
+        if(identity==1){
+            String studentNumber=userName;
+            if (BCryptUtil.checkpw(oldPassword, authUserMapper.getStudentPassword(studentNumber))){
+                return 1;
+            }
+            else
+                return 2;
+        }
+        else if(identity==2){
+            String teacherNumber=userName;
+            if (BCryptUtil.checkpw(oldPassword, authUserMapper.getTeacherPassword(teacherNumber))){
+                return 1;
+            }
+            else
+                return 2;
+        }
+        else{
+            String teacherSecretaryNumber=userName;
+            if (BCryptUtil.checkpw(oldPassword, authUserMapper.getTeacherSecretaryPassword(teacherSecretaryNumber))){
+                return 1;
+            }
+            else
+                return 2;
+        }
+
+
+
+    }
+
+
+    public boolean changePassword(String userName,String newPassword,int identity){
+        String password=BCryptUtil.hashpw(newPassword, BCryptUtil.gensalt(12));
+
+        if(identity==1){
+            String studentNumber=userName;
+            return authUserMapper.changeStudentPassword(studentNumber,password);
+        }
+        else if(identity==2){
+            String teacherNumber=userName;
+            return authUserMapper.changeTeacherPassword(teacherNumber,password);
+        }
+        else{
+            String teacherSecretaryNumber=userName;
+            return authUserMapper.changeTeacherSecretaryPassword(teacherSecretaryNumber,password);
+        }
+
+    }
+
 }

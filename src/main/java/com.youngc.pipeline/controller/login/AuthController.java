@@ -50,4 +50,16 @@ public class AuthController {
 
         return ResultGenerator.generate(ResultCode.FAIL);
     }
+
+    @RequestMapping(path = "/oldPasswordValidate", method = RequestMethod.POST)
+    @ResponseBody
+    Result oldPassword(@RequestParam String userName,@RequestParam String oldPassword,@RequestParam int identity){
+        return ResultGenerator.generate(ResultCode.SUCCESS,authService.oldPassword(userName,oldPassword,identity));
+    }
+
+    @RequestMapping(path = "/changePassword", method = RequestMethod.POST)
+    @ResponseBody
+    Result changePassword(@RequestParam String userName,@RequestParam String newPassword,@RequestParam int identity){
+        return ResultGenerator.generate(ResultCode.SUCCESS,authService.changePassword(userName,newPassword,identity));
+    }
 }
