@@ -12,9 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 
-/**
- * @author liweiqiang
- */
+
 @RestController
 @RequestMapping("/user")
 public class UserManagerController {

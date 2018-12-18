@@ -11,9 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author liweiqiang
- */
+
 @Service
 public class OrgServiceImpl implements OrgService {
     @Autowired

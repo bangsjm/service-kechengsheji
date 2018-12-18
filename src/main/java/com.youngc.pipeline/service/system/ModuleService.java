@@ -6,9 +6,7 @@ import com.youngc.pipeline.model.ModuleModel;
 
 import java.util.List;
 
-/**
- * @author liweiqiang
- */
+
 public interface ModuleService {
     /**
      * 查询模块树
