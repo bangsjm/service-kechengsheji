@@ -15,4 +15,5 @@ public interface ElectiveManageService {
 
     Page searchDetails(String courseNumber,int pageNum, int pageSize);
 
+    boolean deleteDetails(String teacherNumber,String courseNumber);
 }

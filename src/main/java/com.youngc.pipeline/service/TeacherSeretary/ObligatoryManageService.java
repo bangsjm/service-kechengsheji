@@ -3,6 +3,7 @@ package com.youngc.pipeline.service.TeacherSeretary;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.youngc.pipeline.mapper.TeacherSeretary.ObligatoryManageMapper;
+import com.youngc.pipeline.model.CourseManageModel;
 import com.youngc.pipeline.model.ObligatoryManageModel;
 import com.youngc.pipeline.model.TeacherManageModel;
 import org.springframework.stereotype.Service;
@@ -20,4 +21,5 @@ public interface ObligatoryManageService {
 
     int deleteObligatory(String obligatoryIds);
 
+    CourseManageModel getCourseInfo(String courseNumber);
 }

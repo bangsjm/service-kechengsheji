@@ -4,6 +4,7 @@ import com.youngc.pipeline.model.CourseManageModel;
 import com.youngc.pipeline.model.TeacherManageModel;
 import com.youngc.pipeline.model.electiveDetailsModel;
 import com.youngc.pipeline.sqlProvider.system.SystemSqlProvider;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -41,4 +42,18 @@ public interface ElectiveManageMapper {
             "and Ec1.course_number=#{courseNumber} and Ec1.year=#{year} " +
             "GROUP BY Course.course_name,Course.course_number,Teacher.teacher_number,Teacher.teacher_name ")
     List<electiveDetailsModel> searchDetails(@Param("courseNumber") String courseNumber,@Param("year") int year);
+
+    @Select("SELECT email FROM Student,slect_elective_course,Elective_course WHERE Student.student_number=slect_elective_course.student_number AND slect_elective_course.elective_id=Elective_course.elective_id " +
+            "AND Elective_course.teacher_number=#{teacherNumber} AND Elective_course.course_number=#{courseNumber} " +
+            "AND Elective_course.year=#{year}")
+    List<String> getStudent(@Param("courseNumber") String courseNumber,@Param("teacherNumber") String teacherNumber,@Param("year") int year);
+
+    @Delete("DELETE FROM slect_elective_course  WHERE slect_elective_course.elective_id=(SELECT elective_id FROM Elective_course " +
+            "WHERE teacher_number=#{teacherNumber} AND course_number=#{courseNumber} AND year=#{year}) ")
+    boolean deleteSelectDetails(@Param("courseNumber") String courseNumber,@Param("teacherNumber") String teacherNumber,@Param("year") int year);
+
+    @Delete("DELETE FROM Elective_course " +
+            "WHERE teacher_number=#{teacherNumber} AND course_number=#{courseNumber} AND year=#{year} ")
+    boolean deleteDetails(@Param("courseNumber") String courseNumber,@Param("teacherNumber") String teacherNumber,@Param("year") int year);
+
 }

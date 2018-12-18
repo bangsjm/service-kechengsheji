@@ -1,7 +1,5 @@
 package com.youngc.pipeline.mapper.system;
 
-import com.youngc.pipeline.model.DataUnitModel;
-import com.youngc.pipeline.model.DictionaryQueryModel;
 import com.youngc.pipeline.model.SysDataRoleModel;
 import com.youngc.pipeline.sqlProvider.system.SystemSqlProvider;
 import org.apache.ibatis.annotations.*;
@@ -72,14 +70,7 @@ public interface SysDataRoleMapper {
             " FROM sys_unit;")
     List<Map> getOrgUnitTree();
 
-    /**
-     * 查询数据角色关联单位信息
-     *
-     * @return
-     */
-    @Select(" SELECT drole_id,unit_id,status" +
-            " FROM sys_data_role_unit WHERE drole_id = #{droleId};")
-    List<DataUnitModel> getDataUnit(@Param("droleId") Long droleId);
+
 
     /**
      * 删除数据角色关联单位信息

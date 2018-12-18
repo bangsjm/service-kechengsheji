@@ -47,4 +47,10 @@ public interface AuthService {
      */
     Long getUserIdByToken(String token);
 
+
+    int oldPassword(String userName,String oldPassword,int identity);
+
+
+    boolean changePassword(String userName,String newPassword,int identity);
+
 }

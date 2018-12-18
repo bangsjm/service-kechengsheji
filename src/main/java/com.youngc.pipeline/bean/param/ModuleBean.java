@@ -5,9 +5,7 @@ import lombok.Data;
 
 import java.util.Date;
 
-/**
- * @author liweiqiang
- */
+
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ModuleBean {

@@ -43,4 +43,11 @@ public class ObligatoryManageController {
     public Result deleteObligatory(@RequestParam String obligatoryIds){
         return ResultGenerator.generate(ResultCode.SUCCESS,obligatoryManageService.deleteObligatory(obligatoryIds));
     }
+
+    @RequestMapping(path = "/getCourseInfo", method = RequestMethod.GET)
+    @ResponseBody
+    public Result getCourseInfo(@RequestParam String courseNumber){
+        return ResultGenerator.generate(ResultCode.SUCCESS,obligatoryManageService.getCourseInfo(courseNumber));
+
+    }
 }
