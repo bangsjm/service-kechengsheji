@@ -15,6 +15,32 @@ import java.util.Map;
 
 public class  SystemSqlProvider {
 
+    public String selectStudentName(Map map){
+        List<String> xueHao = (List<String>) map.get("xueHao");
+        Long demo1 = (Long)map.get("demo1");
+        Long demo2 = (Long)map.get("demo2");
+
+
+        StringBuffer sql = new StringBuffer();
+        for (int i = 0;i< xueHao.size();i++){
+            String demo = xueHao.get(i)+"__";
+            xueHao.set(i,demo);
+        }
+
+        sql.append("SELECT student_name,student_number,grade FROM Student WHERE ");
+        for (int i = 0;i<xueHao.size();i++){
+            if(i==0){
+                sql.append("student_number LIKE ");
+            }else if(i <xueHao.size()&&i>0){
+                sql.append(" OR student_number LIKE ");
+            }
+            sql.append("'").append(xueHao.get(i)).append("'");
+        }
+
+
+
+        return sql.toString();
+    }
     public String addTeacher(Map map){
         String selectTeachers=(String) map.get("selectTeachers") ;
         String courseNumber=(String) map.get("courseNumber") ;

@@ -36,7 +36,7 @@ public class AuthFilter implements Filter {
     private UserManagerService userManagerService;
 
     private static final Set<String> ALLOWED_PATHS = Collections.unmodifiableSet(new HashSet<String>(
-            Arrays.asList("/auth/login", "/auth/logout", "/register","/auth/demo","/update/updateteacherpassword","/update/chackemail","/update/sendemail")));
+            Arrays.asList("/auth/login", "/auth/logout", "/register","/auth/demo","/update/updateteacherpassword","/update/chackemail","/update/sendemail","/Teacher/DownLoadExcel")));
 
     private static final Set<String> TOKEN_IN_URL_PATHS = Collections.unmodifiableSet(new HashSet<String>(
             Arrays.asList("/export","/TeacherSecretary/excelAddStudent")));
