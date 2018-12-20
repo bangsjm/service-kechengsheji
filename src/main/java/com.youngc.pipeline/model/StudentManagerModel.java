@@ -20,4 +20,6 @@ public class StudentManagerModel {
     private Long entranceYear;
 
     private Long grade;
+
+    private float score;
 }

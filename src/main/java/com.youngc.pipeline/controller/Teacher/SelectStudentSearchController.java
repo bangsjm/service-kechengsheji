@@ -47,4 +47,18 @@ public class SelectStudentSearchController {
                                       @RequestParam int pageNum,@RequestParam int pageSize){
         return ResultGenerator.generate(selectStudentSearchService.electiveSearch(teacherNumber,courseNumber,year,pageNum,pageSize));
     }
+
+    @RequestMapping(path = "/ScoreSearch", method = RequestMethod.GET)
+    @ResponseBody
+    public Result ScoreSearch(@RequestParam String teacherNumber,@RequestParam String courseNumber,@RequestParam int year,
+                                 @RequestParam int pageNum,@RequestParam int pageSize){
+        return ResultGenerator.generate(selectStudentSearchService.getScores(teacherNumber,courseNumber,year,pageNum,pageSize));
+    }
+
+    @RequestMapping(path = "/UpdateScore", method = RequestMethod.GET)
+    @ResponseBody
+    public Result UpdateScore(@RequestParam String teacherNumber,@RequestParam String courseNumber,@RequestParam int year,
+                              @RequestParam float score){
+        return ResultGenerator.generate(ResultCode.SUCCESS,selectStudentSearchService.updateScore(teacherNumber,courseNumber,year,score));
+    }
 }

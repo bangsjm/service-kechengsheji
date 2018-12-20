@@ -8,6 +8,7 @@ import com.youngc.pipeline.sqlProvider.system.SystemSqlProvider;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectProvider;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -37,4 +38,11 @@ public interface SelectStudentSearchMapper {
             "Elective_course.elective_id AND slect_elective_course.student_number = Student.student_number AND teacher_number = #{teacherNumber} AND course_number = " +
             "#{courseNumber} AND year = #{year}")
     List<StudentManagerModel> electiveSearch(@Param("teacherNumber") String teacherNumber,@Param("courseNumber") String courseNumber,@Param("year") int year);
+
+    @Select("SELECT Student.student_number,student_name,grade,score FROM Student,Score WHERE Student.student_number IN (${studentNumbers}) AND Student.student_number = " +
+            "Score.student_number AND course_number = #{courseNumber} AND teacher_number =#{teacherNumber} AND Score.year = #{year} ")
+    List<StudentManagerModel> getScores(@Param("teacherNumber") String teacherNumber,@Param("courseNumber") String courseNumber,@Param("year") int year,@Param("studentNumbers") String studentNumbers);
+
+    @Update("UPDATE Score SET score = #{score} WHERE course_number = #{courseNumber} AND teacher_number = #{teacherNumber} AND year = #{year}")
+    int updateScore(@Param("teacherNumber") String teacherNumber,@Param("courseNumber") String courseNumber,@Param("year") int year,@Param("score") float score);
 }

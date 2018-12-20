@@ -125,4 +125,36 @@ public class SelectStudentSearchServiceImpl implements SelectStudentSearchServic
     public List<CourseManageModel> getCourseElective(String teacherNumber, int year) {
         return selectStudentSearchMapper.getCourseElective(teacherNumber,year);
     }
+
+    public List<StudentManagerModel> getStudentNumbers(List stuNum,Long demo1,Long demo2){
+        return selectStudentSearchMapper.selectStudentName(stuNum,demo1,demo2);
+    }
+    public Page getScores(String teacherNumber, String courseNumber, int year, int pageNum, int pageSize) {
+        List<String> newXueHao =getXuehao(teacherNumber,courseNumber,year);
+        Long demo1 =new Long("123");
+        Long demo2=new Long("123");
+        List<StudentManagerModel> studentNumbers = new ArrayList<StudentManagerModel>();
+        studentNumbers = getStudentNumbers(newXueHao,demo1,demo2);
+        List<String> newStudentNumbers = new ArrayList<String>();
+        for (int i=0;i<studentNumbers.size();i++){
+            newStudentNumbers.add(studentNumbers.get(i).getStudentNumber());
+        }
+        StringBuffer stuNums = new StringBuffer();
+        stuNums.append("'");
+        for(int i =0;i<newStudentNumbers.size();i++){
+            stuNums.append(newStudentNumbers.get(i));
+            if(i!=newStudentNumbers.size()-1){
+                stuNums.append("','");
+            }
+        }
+        stuNums.append("'");
+        String newStuNums = stuNums.toString();
+        System.out.println(newStuNums);
+        PageHelper.startPage(pageNum,pageSize);
+        return  (Page) selectStudentSearchMapper.getScores(teacherNumber,courseNumber,year,newStuNums);
+    }
+
+    public int updateScore(String teacherNumber, String courseNumber, int year, float score) {
+        return selectStudentSearchMapper.updateScore(teacherNumber,courseNumber,year,score);
+    }
 }
