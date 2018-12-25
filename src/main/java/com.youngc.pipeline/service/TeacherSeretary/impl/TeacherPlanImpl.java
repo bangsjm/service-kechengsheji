@@ -29,8 +29,12 @@ public class TeacherPlanImpl implements TeacherPlanService{
         return (Page) teacherPlanMapper.searchCourse(collegeNumber,majorNumber);
     }
 
-    public boolean addCourse(String addCourseIds,String collegeNumber,String majorNumber,int grade,int term){
+    public int addCourse(String addCourseIds,String collegeNumber,String majorNumber,int grade,int term){
         List<Map<String, String>> number=new ArrayList<Map<String, String>>();
+        int isExist=teacherPlanMapper.isExistCourse(addCourseIds,collegeNumber,majorNumber,grade,term);
+        if(isExist>0){
+            return 0;
+        }
         Map map=new HashMap();
         map.put("addCourseIds",addCourseIds);
         map.put("collegeNumber",collegeNumber);
@@ -41,7 +45,8 @@ public class TeacherPlanImpl implements TeacherPlanService{
         int[] gradeAnd=new int[2];
         gradeAnd[0]=grade;
         gradeAnd[1]=term;
-        return teacherPlanMapper.addCourse(Long.parseLong("1"),number,gradeAnd);
+        teacherPlanMapper.addCourse(Long.parseLong("1"),number,gradeAnd);
+        return 1;
     }
 
     public boolean deleteTeachingPlan(String deleteOtIds){
