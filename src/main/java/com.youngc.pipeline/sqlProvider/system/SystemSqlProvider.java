@@ -15,7 +15,7 @@ public class  SystemSqlProvider {
         List<String> xueHao = (List<String>) map.get("xueHao");
         Long demo1 = (Long)map.get("demo1");
         Long demo2 = (Long)map.get("demo2");
-
+        System.out.println("123");
 
         StringBuffer sql = new StringBuffer();
         for (int i = 0;i< xueHao.size();i++){

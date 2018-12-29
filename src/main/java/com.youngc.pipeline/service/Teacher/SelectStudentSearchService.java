@@ -18,4 +18,8 @@ public interface SelectStudentSearchService {
     Page electiveSearch(String teacherNumber, String courseNumber, int year,int pageNum,int pageSize);
 
     List<CourseManageModel> getCourseElective(String teacherNumber,int year);
+
+    Page getScores(String teacherNumber, String courseNumber, int year,int pageNum,int pageSize);
+
+    int updateScore(String teacherNumber, String courseNumber, int year,float score);
 }

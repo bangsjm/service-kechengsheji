@@ -8,7 +8,7 @@ public interface TeacherPlanService {
 
     Page searchCourse(String collegeNumber,String majorNumber,int pageNum,int pageSize);
 
-    boolean addCourse(String addCourseIds,String collegeNumber,String majorNumber,int grade,int term);
+    int addCourse(String addCourseIds,String collegeNumber,String majorNumber,int grade,int term);
 
     boolean deleteTeachingPlan(String deleteOtIds);
 }

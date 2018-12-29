@@ -30,5 +30,9 @@ public interface TeacherPlanMapper {
 
     @Delete("DELETE FROM Obligatory_teachPlan WHERE OtId in (${deleteOtIds})")
     boolean deleteTeachingPlan(@Param("deleteOtIds")String deleteOtIds);
+
+    @Select("select count(*) from Obligatory_teachPlan WHERE course_number in (${addCourseIds}) and " +
+            "major_number=#{majorNumber} and College_number=#{collegeNumber} and grade=#{grade} and term=#{term}")
+    int isExistCourse(@Param("addCourseIds") String addCourseIds,@Param("collegeNumber") String collegeNumber,@Param("majorNumber") String majorNumber,@Param("grade") int grade,@Param("term") int term);
 }
 
