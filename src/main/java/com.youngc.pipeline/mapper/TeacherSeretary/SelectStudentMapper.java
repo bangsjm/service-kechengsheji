@@ -30,7 +30,7 @@ public interface SelectStudentMapper {
     @Select("SELECT major_name from Major where major_number=#{majorNumber} and college_number =#{collegeNumber}")
     String getMajorName(@Param("collegeNumber")String collegeNumber,@Param("majorNumber") String majorNumber);
 
-    @Select("SELECT student_number,email,student_name,sex from Student WHERE student_number LIkE CONCAT('%',#{searchNumber},'%')")
+    @Select("SELECT student_number,email,student_name,sex from Student WHERE student_number LIkE CONCAT('__',#{searchNumber},'%')")
     List<StudentManagerModel> getStudent(@Param("searchNumber")String searchNumber);
 
     @Update("UPDATE Student SET password=#{pad} WHERE student_number=#{studentName}")
