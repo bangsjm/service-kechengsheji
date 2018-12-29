@@ -21,5 +21,10 @@ public interface SelectStudentSearchService {
 
     Page getScores(String teacherNumber, String courseNumber, int year,int pageNum,int pageSize);
 
-    int updateScore(String teacherNumber, String courseNumber, int year,float score);
+    int updateScore(String teacherNumber, String courseNumber, int year,float score,String studentNumber,float oldScore);
+
+    Page getElectiveScore(String teacherNumber, String courseNumber, int year,int pageNum,int pageSize);
+
+    int fillInScore(String teacherNumber,String courseNumber,int year,String studentNumber,float score);
 }
+

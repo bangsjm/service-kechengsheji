@@ -129,6 +129,7 @@ public class SelectStudentSearchServiceImpl implements SelectStudentSearchServic
     public List<StudentManagerModel> getStudentNumbers(List stuNum,Long demo1,Long demo2){
         return selectStudentSearchMapper.selectStudentName(stuNum,demo1,demo2);
     }
+
     public Page getScores(String teacherNumber, String courseNumber, int year, int pageNum, int pageSize) {
         List<String> newXueHao =getXuehao(teacherNumber,courseNumber,year);
         Long demo1 =new Long("123");
@@ -149,12 +150,41 @@ public class SelectStudentSearchServiceImpl implements SelectStudentSearchServic
         }
         stuNums.append("'");
         String newStuNums = stuNums.toString();
-        System.out.println(newStuNums);
         PageHelper.startPage(pageNum,pageSize);
         return  (Page) selectStudentSearchMapper.getScores(teacherNumber,courseNumber,year,newStuNums);
     }
 
-    public int updateScore(String teacherNumber, String courseNumber, int year, float score) {
-        return selectStudentSearchMapper.updateScore(teacherNumber,courseNumber,year,score);
+    public int updateScore(String teacherNumber, String courseNumber, int year, float score,String studentNumber,float oldScore) {
+            return selectStudentSearchMapper.updateScore(teacherNumber,courseNumber,year,score,studentNumber);
     }
+
+    public String getElectiveStudentNumber(String teacherNumber,String courseNumber,int year){
+        List<StudentManagerModel> stuModel = selectStudentSearchMapper.getElectiveStudentNumber(teacherNumber,courseNumber,year);
+        StringBuffer stuNums = new StringBuffer();
+        stuNums.append("'");
+        for(int i =0;i<stuModel.size();i++){
+            stuNums.append(stuModel.get(i).getStudentNumber());
+            if(i!=stuModel.size()-1){
+                stuNums.append("','");
+            }
+        }
+        stuNums.append("'");
+        String newStuNums = stuNums.toString();
+        return  newStuNums;
+    }
+
+    public Page getElectiveScore(String teacherNumber, String courseNumber, int year, int pageNum, int pageSize){
+        String stuNums = getElectiveStudentNumber(teacherNumber,courseNumber,year);
+        PageHelper.startPage(pageNum,pageSize);
+        return (Page) selectStudentSearchMapper.getElectiveScores(teacherNumber,courseNumber,year,stuNums);
+    }
+
+    public int fillInScore(String teacherNumber, String courseNumber, int year, String studentNumber,float score) {
+        if (selectStudentSearchMapper.isExitsScore(teacherNumber,courseNumber,year,studentNumber)>0){
+            return -1;
+        }else{
+            return selectStudentSearchMapper.UpdateNull(teacherNumber,courseNumber,year,score,studentNumber);
+        }
+    }
+
 }

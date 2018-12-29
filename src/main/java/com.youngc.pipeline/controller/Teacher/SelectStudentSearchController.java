@@ -51,14 +51,26 @@ public class SelectStudentSearchController {
     @RequestMapping(path = "/ScoreSearch", method = RequestMethod.GET)
     @ResponseBody
     public Result ScoreSearch(@RequestParam String teacherNumber,@RequestParam String courseNumber,@RequestParam int year,
-                                 @RequestParam int pageNum,@RequestParam int pageSize){
-        return ResultGenerator.generate(selectStudentSearchService.getScores(teacherNumber,courseNumber,year,pageNum,pageSize));
+                                 @RequestParam int pageNum,@RequestParam int pageSize,@RequestParam String nature){
+        if (nature.equals("必修")){
+            return ResultGenerator.generate(selectStudentSearchService.getScores(teacherNumber,courseNumber,year,pageNum,pageSize));
+        }else{
+            return ResultGenerator.generate(selectStudentSearchService.getElectiveScore(teacherNumber,courseNumber,year,pageNum,pageSize));
+        }
     }
 
     @RequestMapping(path = "/UpdateScore", method = RequestMethod.GET)
     @ResponseBody
     public Result UpdateScore(@RequestParam String teacherNumber,@RequestParam String courseNumber,@RequestParam int year,
-                              @RequestParam float score){
-        return ResultGenerator.generate(ResultCode.SUCCESS,selectStudentSearchService.updateScore(teacherNumber,courseNumber,year,score));
+                              @RequestParam float score,@RequestParam String studentNumber,@RequestParam float oldScore){
+        return ResultGenerator.generate(ResultCode.SUCCESS,selectStudentSearchService.updateScore(teacherNumber,courseNumber,year,score,studentNumber,oldScore));
+    }
+
+
+    @RequestMapping(path = "/AddScore", method = RequestMethod.GET)
+    @ResponseBody
+    public Result UpdateScore(@RequestParam String teacherNumber,@RequestParam String courseNumber,@RequestParam int year,
+                              @RequestParam float score,@RequestParam String studentNumber){
+        return ResultGenerator.generate(ResultCode.SUCCESS,selectStudentSearchService.fillInScore(teacherNumber,courseNumber,year,studentNumber,score));
     }
 }

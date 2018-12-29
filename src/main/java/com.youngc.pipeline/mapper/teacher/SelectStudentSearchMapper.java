@@ -5,10 +5,7 @@ import com.youngc.pipeline.model.CourseManageModel;
 import com.youngc.pipeline.model.Major;
 import com.youngc.pipeline.model.StudentManagerModel;
 import com.youngc.pipeline.sqlProvider.system.SystemSqlProvider;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectProvider;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -39,10 +36,29 @@ public interface SelectStudentSearchMapper {
             "#{courseNumber} AND year = #{year}")
     List<StudentManagerModel> electiveSearch(@Param("teacherNumber") String teacherNumber,@Param("courseNumber") String courseNumber,@Param("year") int year);
 
-    @Select("SELECT Student.student_number,student_name,grade,score FROM Student,Score WHERE Student.student_number IN (${studentNumbers}) AND Student.student_number = " +
-            "Score.student_number AND course_number = #{courseNumber} AND teacher_number =#{teacherNumber} AND Score.year = #{year} ")
+    @Select("SELECT Student.student_number,student_name,grade,score FROM Student left join Score on Student.student_number =Score.student_number and course_number = #{courseNumber} " +
+            "AND teacher_number =#{teacherNumber} AND Score.year = #{year} " +
+            "WHERE Student.student_number IN (${studentNumbers})")
     List<StudentManagerModel> getScores(@Param("teacherNumber") String teacherNumber,@Param("courseNumber") String courseNumber,@Param("year") int year,@Param("studentNumbers") String studentNumbers);
 
-    @Update("UPDATE Score SET score = #{score} WHERE course_number = #{courseNumber} AND teacher_number = #{teacherNumber} AND year = #{year}")
-    int updateScore(@Param("teacherNumber") String teacherNumber,@Param("courseNumber") String courseNumber,@Param("year") int year,@Param("score") float score);
+    @Update("UPDATE Score SET score = #{score} WHERE course_number = #{courseNumber} AND teacher_number = #{teacherNumber} AND year = #{year} AND student_number = #{studentNumber}")
+    int updateScore(@Param("teacherNumber") String teacherNumber,@Param("courseNumber") String courseNumber,@Param("year") int year,@Param("score") float score,@Param("studentNumber") String studentNumber);
+
+    @Select("SELECT student_number FROM  Elective_course,slect_elective_course WHERE course_number = #{courseNumber} AND" +
+            " teacher_number = #{teacherNumber} AND year = #{year} AND Elective_course.elective_id = slect_elective_course.elective_id")
+    List<StudentManagerModel> getElectiveStudentNumber(@Param("teacherNumber") String teacherNumber,@Param("courseNumber") String courseNumber,@Param("year") int year);
+
+    @Select("SELECT Student.student_number,student_name,grade,score FROM " +
+            "Student left join Score on Student.student_number =Score.student_number and course_number = #{courseNumber} " +
+            " AND teacher_number = #{teacherNumber} AND Score.year = #{year}" +
+            " WHERE Student.student_number IN (${studentNumbers})")
+    List<StudentManagerModel> getElectiveScores(@Param("teacherNumber") String teacherNumber,@Param("courseNumber") String courseNumber,@Param("year") int year,@Param("studentNumbers") String studentNumbers);
+
+    @Select("SELECT COUNT(*) FROM Score WHERE student_number = #{studentNumber} AND teacher_number = #{teacherNumber} AND " +
+            "year = #{year} AND course_number = #{courseNumber}")
+    int isExitsScore(@Param("teacherNumber") String teacherNumber,@Param("courseNumber") String courseNumber,@Param("year") int year,@Param("studentNumber") String studentNumber);
+
+    @Insert("INSERT INTO Score(student_number,course_number,score,year,teacher_number)" +
+            " VALUES(#{studentNumber},#{courseNumber},#{score},#{year},#{teacherNumber})")
+    int UpdateNull(@Param("teacherNumber") String teacherNumber,@Param("courseNumber") String courseNumber,@Param("year") int year,@Param("score") float score,@Param("studentNumber") String studentNumber);
 }
