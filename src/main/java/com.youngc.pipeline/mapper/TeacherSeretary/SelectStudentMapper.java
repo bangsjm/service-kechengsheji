@@ -33,11 +33,15 @@ public interface SelectStudentMapper {
     @Select("SELECT student_number,email,student_name,sex from Student WHERE student_number LIkE CONCAT('__',#{searchNumber},'%')")
     List<StudentManagerModel> getStudent(@Param("searchNumber")String searchNumber);
 
+    @Select("SELECT student_number,email,student_name,sex from Student WHERE student_number LIkE CONCAT('%',#{searchNumber},'%')")
+    List<StudentManagerModel> getStudent1(@Param("searchNumber")String searchNumber);
+
+
     @Update("UPDATE Student SET password=#{pad} WHERE student_number=#{studentName}")
     boolean resetPassword(@Param("studentName")String studentName,@Param("pad")String pad);
 
     @Update("UPDATE Student SET student_number=#{studentNumber},email=#{email} WHERE student_Number=#{oldStudentNumber}")
-    boolean updateStudent(StudentManagerModel studentManagerModel) ;
+    boolean updateStudent(StudentManagerModel studentManagerModel);
 
     @Select("SELECT COUNT(*) from slect_elective_course  WHERE student_number in ( ${deleteStudentNumbers} )")
     int isExistStudentInElectiveCourse(@Param("deleteStudentNumbers")String deleteStudentNumbers);

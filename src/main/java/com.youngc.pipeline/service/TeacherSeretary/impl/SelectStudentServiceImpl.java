@@ -93,8 +93,14 @@ public class SelectStudentServiceImpl implements SelectStudentService {
     }
 
     public Page getStudent(String searchNumber, int pageNum, int pageSize){
-        PageHelper.startPage(pageNum, pageSize);
-        return (Page) selectStudentMapper.getStudent(searchNumber);
+        if(searchNumber.length()<=4){
+            PageHelper.startPage(pageNum, pageSize);
+            return (Page) selectStudentMapper.getStudent(searchNumber);
+        }
+        else {
+            PageHelper.startPage(pageNum, pageSize);
+            return (Page) selectStudentMapper.getStudent1(searchNumber);
+        }
     }
 
     public boolean resetPassword(String studentNumber,String password){
